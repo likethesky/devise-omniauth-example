@@ -14,6 +14,9 @@ DEFAULT_FB_POST_NAME     = "This Site's Name"
 DEFAULT_PAGE_TITLE       = "This Site's Name"
 DEFAULT_PAGE_DESCRIPTION = "This Site's Name"
 
+GOOGLE_APP_ID            = "foobar"
+GOOGLE_APP_SECRET        = "foobar"
+
 TWITTER_SECRET_KEY       = "L0LJGa5g4TWNUJfK9jmACNt3i2P2ykUw0TVbysQinIg"
 TWITTER_CONSUMER_KEY     = "D4sOenvRrSaI1GIGTTEeSQ"
 

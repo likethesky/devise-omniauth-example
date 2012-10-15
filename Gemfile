@@ -1,27 +1,33 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.0'
+gem 'rails'
 
 gem 'sqlite3'
 
 # Asset template engines
-gem 'sass-rails', "~> 3.1.0"
+gem 'sass-rails'
 gem 'coffee-script'
 gem 'uglifier'
 
-# our auth
-gem 'devise', '~> 1.4.0'
-gem 'omniauth', '~> 0.2.0'
-gem 'twitter_oauth', '~>0.4.3'
-gem "rest-client", "~>1.6.1", :require => "restclient"
+ # our auth
+gem 'devise'
+gem 'omniauth'
+#gem 'twitter_oauth'
+gem 'omniauth-facebook'
+gem 'omniauth-google'
+gem 'omniauth-twitter'
+
+gem 'quiet_assets'
+
+gem "rest-client", :require => "restclient"
 
 # extra stuff
-gem "haml", ">= 3.0.0"
+gem "haml"
 gem "haml-rails"
 gem "jquery-rails"
 
 gem 'paperclip'
-gem "simple_form", "~> 1.2.2"
+gem "simple_form"
 gem "sluggable"
 
 
@@ -33,4 +39,3 @@ group :development, :test do
  gem 'rspec-rails'
  gem 'fixjour'
 end
-

@@ -1,7 +1,7 @@
 # Use this hook to configure devise mailer, warden hooks and so forth. The first
 # four configuration values can also be set straight in your models.
 
-require 'openid/store/filesystem'
+#require 'openid/store/filesystem'
 
 Devise.setup do |config|
   # ==> Mailer Configuration
@@ -138,7 +138,16 @@ Devise.setup do |config|
   config.omniauth :facebook, FACEBOOK_APP_ID, FACEBOOK_APP_SECRET, :scope => FACEBOOK_APP_PERMISSIONS 
 #  config.omniauth :twitter, TWITTER_SECRET_KEY, TWITTER_CONSUMER_KEY
   config.omniauth :twitter, TWITTER_CONSUMER_KEY, TWITTER_SECRET_KEY
-  config.omniauth :google_apps, OpenID::Store::Filesystem.new('/tmp'), :domain => 'gmail.com'
+  config.omniauth :google, GOOGLE_APP_ID, GOOGLE_APP_SECRET
+
+  # At top:
+  #require 'openid/store/filesystem'
+
+  # Then here:
+  #config.omniauth :google_apps, OpenID::Store::Filesystem.new('/tmp'), :domain => 'gmail.com'
+
+  # Finally, below (see "require 'openid/store/nonce' # ..."):
+
   #
   # config.warden do |manager|
   #   manager.oauth(:twitter) do |twitter|
@@ -151,23 +160,23 @@ Devise.setup do |config|
   
   #monkey patch
   
-  require 'openid/store/nonce'
-  require 'openid/store/interface'
-  module OpenID
-    module Store
-      class Memcache < Interface
-        def use_nonce(server_url, timestamp, salt)
-          return false if (timestamp - Time.now.to_i).abs > Nonce.skew
-          ts = timestamp.to_s # base 10 seconds since epoch
-          nonce_key = key_prefix + 'N' + server_url + '|' + ts + '|' + salt
-          result = @cache_client.add(nonce_key, '', expiry(Nonce.skew + 5))
-
-          return result #== true (edited 10/25/10)
-  #        return !!(result =~ /^STORED/)
-        end
-      end
-    end
-  end
+  #require 'openid/store/nonce'
+  #require 'openid/store/interface'
+  #module OpenID
+  #  module Store
+  #    class Memcache < Interface
+  #      def use_nonce(server_url, timestamp, salt)
+  #        return false if (timestamp - Time.now.to_i).abs > Nonce.skew
+  #        ts = timestamp.to_s # base 10 seconds since epoch
+  #        nonce_key = key_prefix + 'N' + server_url + '|' + ts + '|' + salt
+  #        result = @cache_client.add(nonce_key, '', expiry(Nonce.skew + 5))
+  #
+  #        return result #== true (edited 10/25/10)
+  ##        return !!(result =~ /^STORED/)
+  #      end
+  #    end
+  #  end
+  #end
   
   class Hash
     def recursive_find_by_key(key)

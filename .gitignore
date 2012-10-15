@@ -5,3 +5,4 @@ tmp/**/*
 .idea
 .sass-cache/
 public/assets/
+vendor/ruby/
